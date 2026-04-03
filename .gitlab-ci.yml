@@ -10,6 +10,7 @@ test:
   stage: test
   image: maven:3.9-eclipse-temurin-17
   script:
+    - mvn install:install-file -Dfile=libs/task-core-0.3.0.jar -DgroupId=sn.isi.l3gl.core -DartifactId=task-core -Dversion=0.3.0 -Dpackaging=jar -DpomFile=libs/task-core-0.3.0.pom
     - mvn test -DskipTests --no-transfer-progress
   cache:
     paths:
@@ -19,7 +20,7 @@ build:
   stage: build
   image: maven:3.9-eclipse-temurin-17
   script:
-    - mvn install:install-file -Dfile=libs/task-core-0.3.0.jar -DgroupId=sn.isi.l3gl.core -DartifactId=task-core -Dversion=0.3.0 -Dpackaging=jar
+    - mvn install:install-file -Dfile=libs/task-core-0.3.0.jar -DgroupId=sn.isi.l3gl.core -DartifactId=task-core -Dversion=0.3.0 -Dpackaging=jar -DpomFile=libs/task-core-0.3.0.pom
     - mvn clean package -DskipTests --no-transfer-progress
   artifacts:
     paths:

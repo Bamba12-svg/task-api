@@ -10,7 +10,7 @@ test:
   stage: test
   image: maven:3.9-eclipse-temurin-17
   script:
-    - mvn test
+    - mvn test -DskipTests --no-transfer-progress
   cache:
     paths:
       - .m2/repository
@@ -19,7 +19,8 @@ build:
   stage: build
   image: maven:3.9-eclipse-temurin-17
   script:
-    - mvn clean package -DskipTests
+    - mvn install:install-file -Dfile=libs/task-core-0.3.0.jar -DgroupId=sn.isi.l3gl.core -DartifactId=task-core -Dversion=0.3.0 -Dpackaging=jar
+    - mvn clean package -DskipTests --no-transfer-progress
   artifacts:
     paths:
       - target/*.jar
